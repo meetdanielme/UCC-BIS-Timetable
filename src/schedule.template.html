@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="data:,">
+  <title>Year 2 Schedule · BSc Business Information Systems</title>
+  <style>
+    :root {
+      --gold: #ffb500;
+      --navy: #003c69;
+      --blue: #0b4d84;
+      --ink: #121212;
+      --canvas: #f6f8fa;
+      --surface: #ffffff;
+      --text: #16324a;
+      --border: #d2d8df;
+      --muted: #5b6f81;
+      --soft: #718397;
+      --danger: #c62828;
+      --header-height: 58px;
+      --hour-height: 68px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --shadow-focus: 0 0 0 3px rgba(255, 181, 0, 0.36);
+      font-family: "Fira GO", "Fira Sans", Arial, sans-serif;
+      color: var(--text);
+      background: var(--canvas);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-width: 320px; background: var(--canvas); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--canvas);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    button, select, input { font: inherit; }
+    button, select { min-height: 44px; }
+    button { cursor: pointer; }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+      box-shadow: var(--shadow-focus);
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 8px;
+      left: 8px;
+      padding: 8px 12px;
+      transform: translateY(-150%);
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .topbar {
+      min-height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 28px;
+      border-bottom: 3px solid var(--gold);
+      background: var(--navy);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand-logo {
+      display: block;
+      flex: 0 0 90px;
+      width: 90px;
+      height: 58px;
+      max-width: none;
+      object-fit: contain;
+    }
+
+    .brand-detail { color: #e7eef4; font-size: 13px; }
+
+    .topbar-meta {
+      color: #e7eef4;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .page-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 32px 20px;
+      background: var(--surface);
+      color: var(--navy);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Merriweather, Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+    }
+
+    h1 { font-size: clamp(32px, 4vw, 52px); line-height: 1.08; }
+    h2 { font-size: 24px; line-height: 1.2; }
+    h3 { font-size: 19px; line-height: 1.25; }
+
+    .page-heading p { margin: 7px 0 0; color: #46637d; }
+
+    .control-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-width: 44px;
+      padding: 9px 14px;
+      border: 1px solid #a6b3bf;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+      transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+    }
+
+    .control-button:hover { border-color: var(--gold); background: #fff8df; }
+    .control-button svg { width: 20px; height: 20px; }
+
+    .semester-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 32px;
+      border-bottom: 1px solid #bac3ca;
+      background: var(--surface);
+    }
+
+    .semester-tab {
+      min-width: 150px;
+      padding: 12px 20px;
+      border: 1px solid #bac3ca;
+      border-bottom: 0;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      background: var(--surface);
+      color: #2e4052;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .semester-tab[aria-selected="true"] {
+      border-color: var(--navy);
+      background: var(--navy);
+      color: var(--surface);
+    }
+
+    .week-toolbar {
+      display: grid;
+      grid-template-columns: auto auto minmax(230px, 1fr) minmax(200px, 250px) auto auto;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--navy);
+    }
+
+    .week-summary { padding-inline: 8px; }
+    .week-summary strong {
+      display: block;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+    .week-summary span { color: var(--muted); font-size: 14px; }
+
+    .week-select {
+      width: 100%;
+      max-width: 250px;
+      padding: 8px 38px 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .group-switch {
+      align-self: stretch;
+      display: inline-grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      border: 1px solid var(--navy);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+
+    .group-switch button {
+      min-width: 46px;
+      min-height: 42px;
+      padding: 7px 10px;
+      border: 0;
+      background: var(--surface);
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .group-switch button + button { border-left: 1px solid var(--navy); }
+    .group-switch button[aria-pressed="true"] {
+      background: var(--navy);
+      color: var(--surface);
+    }
+    .group-switch button:hover { background: #fff8df; color: var(--navy); }
+    .group-switch button[aria-pressed="true"]:hover { background: var(--blue); color: var(--surface); }
+
+    .notice {
+      display: none;
+      margin: 16px 32px 0;
+      padding: 12px 16px;
+      border-left: 4px solid var(--gold);
+      background: #fff7d6;
+      color: #594100;
+    }
+    .notice.is-visible { display: block; }
+
+    .app-layout {
+      display: grid;
+      grid-template-columns: 225px minmax(660px, 1fr) 250px;
+      min-height: 680px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .app-layout.filters-collapsed {
+      grid-template-columns: 64px minmax(660px, 1fr) 250px;
+    }
+
+    .filters,
+    .context-rail {
+      padding: 20px 16px;
+      background: var(--surface);
+      color: var(--navy);
+    }
+    .filters { border-right: 1px solid var(--border); }
+    .context-rail { border-left: 1px solid var(--border); }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .filter-heading-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-icon-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      min-height: 32px;
+      padding: 5px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--navy);
+    }
+    .filter-icon-button:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-icon-button svg {
+      width: 17px;
+      height: 17px;
+      transition: transform 150ms ease;
+    }
+
+    .filter-utility-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 24px;
+      margin: -4px 0 12px;
+    }
+
+    .filter-status {
+      min-height: 18px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .app-layout.filters-collapsed .filters { padding-inline: 10px; }
+    .app-layout.filters-collapsed .filters .section-heading { justify-content: center; }
+    .app-layout.filters-collapsed .filter-body,
+    .app-layout.filters-collapsed #filters-title,
+    .app-layout.filters-collapsed [data-action="save-filters"] {
+      display: none;
+    }
+    .app-layout.filters-collapsed [data-action="toggle-filters"] svg {
+      transform: rotate(180deg);
+    }
+
+    .filter-action {
+      min-height: auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .filter-group {
+      margin: 0 0 24px;
+      padding: 0;
+      border: 0;
+    }
+
+    .filter-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .filter-group legend {
+      margin-bottom: 10px;
+      color: #52687a;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .filter-list { display: grid; gap: 6px; }
+
+    .filter-item {
+      display: grid;
+      grid-template-columns: 18px 10px 1fr;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .filter-item input { width: 17px; height: 17px; accent-color: var(--navy); }
+    .module-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--module-color); }
+    .filter-copy { min-width: 0; }
+    .filter-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 13px;
+    }
+    .filter-copy small {
+      display: -webkit-box;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.3;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .module-key {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+    .module-key summary {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .module-key dl { margin: 12px 0 0; }
+    .module-key dl > div {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .module-key dt {
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .module-key dd {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .schedule-region {
+      min-width: 0;
+      padding: 20px;
+      background: var(--surface);
+      color: var(--navy);
+    }
+
+    .schedule-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .schedule-heading p { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+    .hours { color: var(--blue); font-size: 14px; font-weight: 700; }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 54px repeat(5, minmax(112px, 1fr));
+      min-width: 640px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+    }
+
+    .timeline-corner,
+    .day-header {
+      min-height: 62px;
+      padding: 11px 8px;
+      border-bottom: 1px solid var(--border);
+      background: var(--canvas);
+    }
+
+    .day-header {
+      border-left: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .day-header span { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 400; }
+
+    .time-axis {
+      position: relative;
+      height: calc(11 * var(--hour-height));
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(var(--hour-height) - 1px),
+          var(--border) calc(var(--hour-height) - 1px),
+          var(--border) var(--hour-height)
+        );
+    }
+
+    .time-label {
+      position: absolute;
+      right: 8px;
+      transform: translateY(-50%);
+      color: var(--soft);
+      font-size: 11px;
+    }
+
+    .day-column {
+      position: relative;
+      height: calc(11 * var(--hour-height));
+      border-left: 1px solid var(--border);
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(var(--hour-height) - 1px),
+          var(--border) calc(var(--hour-height) - 1px),
+          var(--border) var(--hour-height)
+        ),
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(var(--hour-height) / 2 - 1px),
+          rgba(55, 65, 81, 0.38) calc(var(--hour-height) / 2 - 1px),
+          rgba(55, 65, 81, 0.38) calc(var(--hour-height) / 2)
+        );
+    }
+
+    .event {
+      position: absolute;
+      z-index: 1;
+      min-height: 38px;
+      overflow: hidden;
+      padding: 7px 7px 6px;
+      border: 1px solid var(--module-color);
+      border-left: 4px solid var(--module-color);
+      border-radius: var(--radius-sm);
+      background: var(--module-color);
+      color: #ffffff;
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .event.tutorial { background: var(--module-color); }
+    .event.cancelled {
+      border-color: #8f4d4d;
+      background: #342020;
+      opacity: 0.8;
+      text-decoration: line-through;
+    }
+    .event strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+    .event-time { color: #ffffff; font-weight: 600; }
+    .event-room { display: block; overflow: hidden; color: #eef6fb; text-overflow: ellipsis; white-space: nowrap; }
+    .event-badge {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      min-width: 17px;
+      padding: 1px 3px;
+      border: 0;
+      border-radius: 2px;
+      background: #ffffff;
+      color: var(--navy);
+      font-size: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .agenda { display: none; }
+    .empty-state {
+      padding: 40px 18px;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .context-card {
+      padding: 0 0 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .context-card:last-child { border-bottom: 0; }
+    .context-card h3 { margin-bottom: 12px; }
+    .context-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .context-card strong { color: var(--navy); }
+    .context-accent { padding-left: 10px; border-left: 3px solid var(--gold); }
+    .context-value {
+      display: block;
+      margin: 2px 0;
+      color: var(--blue);
+      font-family: Merriweather, Georgia, serif;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .calendar-section {
+      padding: 38px 32px 48px;
+      background: var(--surface);
+      color: var(--navy);
+    }
+    .calendar-section > p { margin: 7px 0 24px; color: #526b80; }
+    .academic-events-upcoming {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .academic-event {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 13px;
+      min-height: 96px;
+      padding: 16px;
+      border-top: 3px solid var(--event-accent, var(--blue));
+      background: var(--canvas);
+    }
+    .academic-event time {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.15;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .academic-event time strong {
+      display: block;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 25px;
+      line-height: 1;
+    }
+    .academic-event-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .academic-event-copy small { color: var(--muted); font-size: 11px; }
+    .academic-events-more {
+      margin-top: 22px;
+      border-top: 1px solid var(--border);
+    }
+    .academic-events-more summary {
+      width: fit-content;
+      padding: 15px 0 4px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .academic-events-archive {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 34px;
+      margin-top: 14px;
+    }
+    .academic-event-compact {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .academic-event-compact time { color: var(--blue); font-size: 12px; font-weight: 700; }
+    .academic-event-compact span { color: #263f54; font-size: 13px; }
+
+    .footer {
+      padding: 16px 32px;
+      border-top: 1px solid var(--border);
+      background: var(--canvas);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1120px) {
+      .app-layout { grid-template-columns: 200px minmax(620px, 1fr); }
+      .app-layout.filters-collapsed { grid-template-columns: 64px minmax(620px, 1fr); }
+      .context-rail {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        border-top: 1px solid var(--border);
+        border-left: 0;
+      }
+      .context-card { margin: 0; padding: 0 18px 0 0; border-right: 1px solid var(--border); border-bottom: 0; }
+    }
+
+    @media (max-width: 760px) {
+      .topbar { padding: 0 16px; }
+      .brand-detail, .topbar-meta { display: none; }
+      .page-heading { padding: 22px 16px 16px; }
+      .page-heading p { font-size: 13px; }
+      .page-heading .control-button span { display: none; }
+      .semester-tabs { padding: 0 16px; }
+      .semester-tab { flex: 1; min-width: 0; }
+      .week-toolbar {
+        grid-template-columns: auto 1fr auto;
+        padding: 14px 16px;
+      }
+      .week-summary { grid-column: 1 / -1; grid-row: 1; padding: 0 0 6px; }
+      .week-toolbar [data-action="previous-week"] { grid-column: 1; grid-row: 2; }
+      .week-select { grid-column: 2; grid-row: 2; max-width: none; }
+      .week-toolbar [data-action="next-week"] { grid-column: 3; grid-row: 2; }
+      .week-toolbar [data-action="today"] { display: none; }
+      .group-switch { grid-column: 1 / -1; grid-row: 3; margin-top: 4px; }
+      .notice { margin: 12px 16px 0; }
+      .app-layout { display: flex; flex-direction: column; min-height: auto; }
+      .filters {
+        order: 1;
+        padding: 16px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .app-layout.filters-collapsed .filters { padding: 16px; }
+      .app-layout.filters-collapsed .filters .section-heading { justify-content: space-between; margin: 0; }
+      .app-layout.filters-collapsed #filters-title { display: block; }
+      .app-layout.filters-collapsed .filter-heading-actions { margin-left: auto; }
+      .filter-group { margin-bottom: 14px; }
+      .filter-list { grid-template-columns: 1fr; }
+      .schedule-region { order: 2; padding: 18px 16px 28px; }
+      .timeline { display: none; }
+      .agenda { display: grid; gap: 24px; }
+      .agenda-day h3 {
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      .agenda-events { display: grid; gap: 8px; margin-top: 9px; }
+      .agenda-event {
+        display: grid;
+        grid-template-columns: 76px 1fr;
+        gap: 12px;
+        padding: 11px 12px;
+        border-left: 4px solid var(--module-color);
+        background: var(--canvas);
+        color: var(--navy);
+      }
+      .agenda-event.cancelled { background: #342020; text-decoration: line-through; }
+      .agenda-event time { color: var(--gold); font-size: 12px; font-weight: 700; }
+      .agenda-event p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+      .agenda-module-name { color: var(--navy) !important; font-weight: 600; }
+      .overlap-note { color: var(--blue); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+      .context-rail {
+        order: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 18px 16px;
+      }
+      .context-card { padding: 0 0 16px; border-right: 0; border-bottom: 1px solid var(--border); }
+      .calendar-section { padding: 28px 16px; }
+      .academic-events-upcoming { grid-template-columns: 1fr; gap: 10px; }
+      .academic-event { min-height: 0; }
+      .academic-events-archive { grid-template-columns: 1fr; }
+      .footer { padding: 16px; }
+    }
+
+    @media print {
+      :root { color-scheme: light; }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      .topbar, .page-heading .control-button, .semester-tabs, .week-toolbar button,
+      .week-toolbar select, .filters, .context-rail, .calendar-section, .footer { display: none !important; }
+      .page-heading { padding: 0 0 14px; color: #000; }
+      .page-heading p { color: #333; }
+      .week-toolbar { display: block; padding: 0 0 12px; background: #fff; color: #000; border: 0; }
+      .week-summary span { color: #333; }
+      .app-layout { display: block; min-height: 0; border: 0; }
+      .schedule-region { padding: 0; background: #fff; color: #000; }
+      .schedule-heading p { color: #333; }
+      .timeline { display: none; }
+      .agenda { display: grid; gap: 16px; }
+      .agenda-day h3 { padding-bottom: 5px; border-bottom: 1px solid #999; }
+      .agenda-events { display: grid; gap: 5px; margin-top: 5px; }
+      .agenda-event {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 10px;
+        padding: 5px 8px;
+        border-left: 3px solid #003c69;
+        color: #000;
+        background: #f4f4f4;
+        break-inside: avoid;
+      }
+      .agenda-event p { margin: 0; color: #333; }
+      .overlap-note { color: #8b5600; font-size: 9px; font-weight: 700; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body data-theme="bright">
+  <a class="skip-link" href="#schedule">Skip to schedule</a>
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="data:image/png;base64,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" alt="University College Cork">
+      <span class="brand-detail">BSc Business Information Systems</span>
+    </div>
+    <div class="topbar-meta" id="topbar-meta">Academic year 2026-27 · Group A</div>
+  </header>
+
+  <main>
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Year 2 Schedule</h1>
+        <p>BSc Business Information Systems · 2026-27</p>
+      </div>
+      <button class="control-button" type="button" data-action="print">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <path d="M6 14h12v7H6z"/>
+        </svg>
+        <span>Print</span>
+      </button>
+    </section>
+
+    <nav class="semester-tabs" aria-label="Choose semester" role="tablist">
+      <button class="semester-tab" type="button" role="tab" data-semester="1">Semester 1</button>
+      <button class="semester-tab" type="button" role="tab" data-semester="2">Semester 2</button>
+    </nav>
+
+    <section class="week-toolbar" aria-label="Week navigation">
+      <button class="control-button" type="button" data-action="previous-week" aria-label="Previous teaching week">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button class="control-button" type="button" data-action="today">Today</button>
+      <div class="week-summary">
+        <strong id="week-title">Week</strong>
+        <span id="week-dates"></span>
+      </div>
+      <label class="sr-only" for="week-select">Choose teaching week</label>
+      <select class="week-select" id="week-select"></select>
+      <div class="group-switch" role="group" aria-label="Choose tutorial group">
+        <button type="button" data-group="A" aria-pressed="true">Group A</button>
+        <button type="button" data-group="B" aria-pressed="false">Group B</button>
+      </div>
+      <button class="control-button" type="button" data-action="next-week" aria-label="Next teaching week">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </section>
+
+    <div class="notice" id="calendar-notice" role="status"></div>
+
+    <div class="app-layout">
+      <aside class="filters" aria-labelledby="filters-title">
+        <div class="section-heading">
+          <h3 id="filters-title">Filters</h3>
+          <div class="filter-heading-actions">
+            <button class="filter-action" type="button" data-action="save-filters">Save</button>
+            <button class="filter-icon-button" type="button" data-action="toggle-filters" aria-expanded="true" aria-controls="filter-panel" aria-label="Collapse filters">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="filter-body" id="filter-panel">
+          <div class="filter-utility-row">
+            <span class="filter-status" id="filter-save-status" aria-live="polite"></span>
+            <button class="filter-action" type="button" data-action="clear-filters">Hide electives</button>
+          </div>
+          <p class="filter-note">Core modules are always shown. Choose which electives appear.</p>
+          <fieldset class="filter-group">
+            <legend>Elective modules</legend>
+            <div class="filter-list" id="module-filters"></div>
+          </fieldset>
+          <fieldset class="filter-group">
+            <legend>Session type</legend>
+            <div class="filter-list" id="type-filters"></div>
+          </fieldset>
+          <button class="control-button" type="button" data-action="select-all">Show all electives</button>
+          <details class="module-key">
+            <summary>Module names</summary>
+            <dl id="module-key-list"></dl>
+          </details>
+        </div>
+      </aside>
+
+      <section class="schedule-region" id="schedule" aria-labelledby="schedule-title">
+        <div class="schedule-heading">
+          <div>
+            <h2 id="schedule-title">Weekly schedule</h2>
+            <p id="schedule-description">Group A lectures and tutorials</p>
+          </div>
+          <span class="hours" id="weekly-hours"></span>
+        </div>
+        <div class="timeline" id="timeline" aria-label="Weekly timetable"></div>
+        <div class="agenda" id="agenda"></div>
+      </section>
+
+      <aside class="context-rail" aria-label="Week context">
+        <section class="context-card">
+          <h3>Up next</h3>
+          <div class="context-accent" id="next-event"></div>
+        </section>
+        <section class="context-card">
+          <h3>Academic milestone</h3>
+          <p id="nearest-milestone"></p>
+        </section>
+        <section class="context-card">
+          <h3>Weekly load</h3>
+          <span class="context-value" id="load-value">0</span>
+          <p>scheduled contact hours, excluding public-holiday cancellations</p>
+        </section>
+      </aside>
+    </div>
+
+    <section class="calendar-section" aria-labelledby="calendar-title">
+      <h2 id="calendar-title">Academic events</h2>
+      <p>The next important dates for this point in the teaching year.</p>
+      <div class="academic-events-upcoming" id="upcoming-milestones"></div>
+      <details class="academic-events-more">
+        <summary>View full academic calendar</summary>
+        <div class="academic-events-archive" id="milestone-list"></div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="footer">Source: supplied timetable PDFs and academic calendar · Room codes are shown exactly as provided.</footer>
+  <div class="sr-only" id="announcer" aria-live="polite"></div>
+
+  <script>
+    "use strict";
+    <!-- DATA -->
+    <!-- CORE -->
+    <!-- UI -->
+  </script>
+</body>
+</html>

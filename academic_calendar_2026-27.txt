@@ -1,0 +1,47 @@
+UCC Academic Calendar 2026-27 - Milestone Events
+=================================================
+Source: https://www.ucc.ie/en/student-records/key-dates/
+Note: Dates are subject to change
+Note: These events are integrated into schedule.html
+
+SEMESTER 1
+----------
+07 September 2026    Start of Academic Year - second years and beyond
+14 September 2026    Start of Academic Year - first years only
+26 October 2026      Public Holiday - no lectures
+TBC                  Start of winter supplemental repeat examinations (Final Medical students only)
+TBC                  End of winter supplemental repeat examinations (Final Medical students only)
+27 November 2026     End of Semester 1 lectures - second years and beyond
+30 November 2026     Study Period S1 (one week) - second years and beyond
+30 November 2026     Last week of S1 lectures - first year students
+07 December 2026     Start of winter examinations - second years and beyond
+07 December 2026     Study Period S1 - first years only
+14 December 2026     Start of winter examinations - first years only
+18 December 2026     End of winter examinations
+18 December 2026     Christmas recess begins (three weeks)
+
+SEMESTER 2
+----------
+11 January 2027      Lectures begin semester 2 - all years
+01 February 2027     Public Holiday - St Brigid's Day - no lectures
+TBC                  Start of Spring Examinations
+17 March 2027        Public Holiday - St Patrick's Day - no lectures
+TBC                  End of Spring Examinations
+30 March 2027        Last week of semester 2
+19 Mar-02 April 2027 Easter Recess (two weeks)
+19-29 April 2027     Study Period S2 (two weeks)
+30 April 2027        Start of summer examinations
+03 May 2027          Public Holiday - no exams
+14 May 2027          End of summer examinations
+31 May 2027          Summer Recess begins
+
+AUTUMN REPEAT EXAMINATIONS
+--------------------------
+30 July 2027         Start of autumn examinations
+03 August 2027       Public Holiday - August Bank Holiday - no lectures
+13 August 2027       End of autumn examinations
+
+PROVISIONAL START DATES 2027-28
+-------------------------------
+06 September 2027    Start of Academic Year 2027-28 - second years and beyond
+13 September 2027    Start of Academic Year 2027-28 - first years only
