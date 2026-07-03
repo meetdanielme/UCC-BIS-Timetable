@@ -505,7 +505,7 @@
       border-left: 4px solid var(--module-color);
       border-radius: var(--radius-sm);
       background: var(--module-color);
-      color: #ffffff;
+      color: var(--module-text);
       font-size: 11px;
       line-height: 1.25;
     }
@@ -514,12 +514,13 @@
     .event.cancelled {
       border-color: #8f4d4d;
       background: #342020;
+      color: #ffffff;
       opacity: 0.8;
       text-decoration: line-through;
     }
     .event strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
-    .event-time { color: #ffffff; font-weight: 600; }
-    .event-room { display: block; overflow: hidden; color: #eef6fb; text-overflow: ellipsis; white-space: nowrap; }
+    .event-time { color: inherit; font-weight: 600; }
+    .event-room { display: block; overflow: hidden; color: inherit; text-overflow: ellipsis; white-space: nowrap; }
     .event-badge {
       position: absolute;
       top: 5px;

@@ -505,7 +505,7 @@
       border-left: 4px solid var(--module-color);
       border-radius: var(--radius-sm);
       background: var(--module-color);
-      color: #ffffff;
+      color: var(--module-text);
       font-size: 11px;
       line-height: 1.25;
     }
@@ -514,12 +514,13 @@
     .event.cancelled {
       border-color: #8f4d4d;
       background: #342020;
+      color: #ffffff;
       opacity: 0.8;
       text-decoration: line-through;
     }
     .event strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
-    .event-time { color: #ffffff; font-weight: 600; }
-    .event-room { display: block; overflow: hidden; color: #eef6fb; text-overflow: ellipsis; white-space: nowrap; }
+    .event-time { color: inherit; font-weight: 600; }
+    .event-room { display: block; overflow: hidden; color: inherit; text-overflow: ellipsis; white-space: nowrap; }
     .event-badge {
       position: absolute;
       top: 5px;
@@ -1257,16 +1258,14 @@ function nearestMilestone(date, calendar) {
   );
 }
 
-    const moduleColors = [
-  "#005eb8",
-  "#1f7a4f",
-  "#6a3d9a",
-  "#c65d00",
-  "#007b83",
-  "#b3261e",
-  "#8a4b32",
-  "#526577",
-];
+    const subjectColors = {
+  IS: "#ffb500",
+  AC: "#b3261e",
+  EC: "#005eb8",
+  ST: "#005eb8",
+  MG: "#526577",
+  FE: "#1f7a4f",
+};
 
 const icons = {
   cancelled: "Cancelled",
@@ -1346,8 +1345,11 @@ function escapeHtml(value) {
 }
 
 function moduleColor(module) {
-  const modules = [...new Set(events.map((event) => event.module))].sort();
-  return moduleColors[modules.indexOf(module) % moduleColors.length];
+  return subjectColors[module.slice(0, 2)] ?? "#6a3d9a";
+}
+
+function moduleTextColor(module) {
+  return module.startsWith("IS") ? "#14213d" : "#ffffff";
 }
 
 function currentWeek() {
@@ -1535,7 +1537,7 @@ function eventMarkup(event, overlap) {
   return `
     <article
       class="event ${event.kind.toLowerCase()} ${event.cancelled ? "cancelled" : ""}"
-      style="top:calc(${topPercent}% + 2px);height:calc(${heightPercent}% - 4px);left:${left};width:${width};--module-color:${moduleColor(event.module)}"
+      style="top:calc(${topPercent}% + 2px);height:calc(${heightPercent}% - 4px);left:${left};width:${width};--module-color:${moduleColor(event.module)};--module-text:${moduleTextColor(event.module)}"
       aria-label="${escapeHtml(label)}"
       title="${escapeHtml(label)}"
     >
