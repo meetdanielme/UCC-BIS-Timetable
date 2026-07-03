@@ -58,6 +58,24 @@ test("built planner embeds source data and no module imports", async () => {
   assert.doesNotMatch(html, /\bexport\s+(const|function)/);
 });
 
+test("module colours are assigned by subject area", async () => {
+  const html = await readFile(outputUrl, "utf8");
+
+  for (const [subject, colour] of Object.entries({
+    IS: "#ffb500",
+    AC: "#b3261e",
+    EC: "#005eb8",
+    ST: "#005eb8",
+    MG: "#526577",
+    FE: "#1f7a4f",
+  })) {
+    assert.match(html, new RegExp(`${subject}: "${colour}"`));
+  }
+  assert.match(html, /subjectColors\[module\.slice\(0, 2\)\]/);
+  assert.match(html, /--module-text:\$\{moduleTextColor\(event\.module\)\}/);
+  assert.match(html, /color: var\(--module-text\)/);
+});
+
 test("filters apply only to electives and expose full module names", async () => {
   const html = await readFile(outputUrl, "utf8");
 

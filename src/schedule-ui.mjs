@@ -1,13 +1,11 @@
-const moduleColors = [
-  "#005eb8",
-  "#1f7a4f",
-  "#6a3d9a",
-  "#c65d00",
-  "#007b83",
-  "#b3261e",
-  "#8a4b32",
-  "#526577",
-];
+const subjectColors = {
+  IS: "#ffb500",
+  AC: "#b3261e",
+  EC: "#005eb8",
+  ST: "#005eb8",
+  MG: "#526577",
+  FE: "#1f7a4f",
+};
 
 const icons = {
   cancelled: "Cancelled",
@@ -87,8 +85,11 @@ function escapeHtml(value) {
 }
 
 function moduleColor(module) {
-  const modules = [...new Set(events.map((event) => event.module))].sort();
-  return moduleColors[modules.indexOf(module) % moduleColors.length];
+  return subjectColors[module.slice(0, 2)] ?? "#6a3d9a";
+}
+
+function moduleTextColor(module) {
+  return module.startsWith("IS") ? "#14213d" : "#ffffff";
 }
 
 function currentWeek() {
@@ -276,7 +277,7 @@ function eventMarkup(event, overlap) {
   return `
     <article
       class="event ${event.kind.toLowerCase()} ${event.cancelled ? "cancelled" : ""}"
-      style="top:calc(${topPercent}% + 2px);height:calc(${heightPercent}% - 4px);left:${left};width:${width};--module-color:${moduleColor(event.module)}"
+      style="top:calc(${topPercent}% + 2px);height:calc(${heightPercent}% - 4px);left:${left};width:${width};--module-color:${moduleColor(event.module)};--module-text:${moduleTextColor(event.module)}"
       aria-label="${escapeHtml(label)}"
       title="${escapeHtml(label)}"
     >
