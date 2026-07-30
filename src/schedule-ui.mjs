@@ -53,6 +53,7 @@ const state = {
 const elements = {
   appLayout: document.querySelector(".app-layout"),
   semesterTabs: [...document.querySelectorAll("[data-semester]")],
+  groupSwitch: document.querySelector(".group-switch"),
   groupButtons: [...document.querySelectorAll("[data-group]")],
   topbarMeta: document.querySelector("#topbar-meta"),
   weekSelect: document.querySelector("#week-select"),
@@ -106,6 +107,17 @@ function semesterModules() {
 
 function semesterElectives() {
   return semesterModules().filter((module) => moduleCatalog[module]?.elective);
+}
+
+function semesterKinds() {
+  const available = new Set(
+    events.filter(({ semester }) => semester === state.semester).map(({ kind }) => kind),
+  );
+  return ["Lecture", "Tutorial"].filter((kind) => available.has(kind));
+}
+
+function semesterHasGroups() {
+  return events.some(({ semester, group }) => semester === state.semester && group);
 }
 
 function moduleInfo(module) {
@@ -190,10 +202,14 @@ function renderSemesterTabs() {
 }
 
 function renderGroupControls() {
+  const hasGroups = semesterHasGroups();
+  elements.groupSwitch.hidden = !hasGroups;
   for (const button of elements.groupButtons) {
     button.setAttribute("aria-pressed", String(button.dataset.group === state.group));
   }
-  elements.topbarMeta.textContent = `Academic year 2026-27 · Group ${state.group}`;
+  elements.topbarMeta.textContent = hasGroups
+    ? `Academic year 2026-27 · Group ${state.group}`
+    : "Academic year 2026-27 · Lectures";
 }
 
 function renderWeekControls() {
@@ -251,7 +267,7 @@ function renderFilters() {
     )
     .join("");
 
-  elements.typeFilters.innerHTML = ["Lecture", "Tutorial"]
+  elements.typeFilters.innerHTML = semesterKinds()
     .map(
       (kind) => `
         <label class="filter-item">
@@ -373,9 +389,12 @@ function renderContext() {
 
   const selectedElectives = state.modules.size;
   const electiveTotal = semesterElectives().length;
-  const selectedTypes = [...state.kinds].join(" + ") || "No session types";
+  const selectedTypes =
+    semesterKinds().filter((kind) => state.kinds.has(kind)).join(" + ") ||
+    "No session types";
+  const groupLabel = semesterHasGroups() ? `Group ${state.group} · ` : "";
   document.querySelector("#schedule-description").textContent =
-    `Group ${state.group} · ${visible.length} sessions · ${selectedElectives}/${electiveTotal} electives · ${selectedTypes}`;
+    `${groupLabel}${visible.length} sessions · ${selectedElectives}/${electiveTotal} electives · ${selectedTypes}`;
 }
 
 function renderMilestones() {
@@ -432,7 +451,8 @@ function syncHash() {
 
 function announce() {
   const week = currentWeek();
-  elements.announcer.textContent = `Showing Group ${state.group}, Semester ${week.semester}, Week ${week.number}, ${weekEvents().length} sessions.`;
+  const groupLabel = semesterHasGroups() ? `Group ${state.group}, ` : "";
+  elements.announcer.textContent = `Showing ${groupLabel}Semester ${week.semester}, Week ${week.number}, ${weekEvents().length} sessions.`;
 }
 
 function render() {

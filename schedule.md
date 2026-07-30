@@ -55,6 +55,7 @@ Module names and elective classifications come from the linked Notion Modules da
 |---|---|---|---|---|
 | 13:00-14:00 | IS2208 | Tutorial, Group A | ORB_BIS | 6-17 |
 | 13:00-14:00 | IS2217 | Lecture | BHSC_G02* | 6 only |
+| 15:00-16:00 | IS2217 | Lecture | BHSC_G01* | 10 and 14 |
 | 16:00-17:00 | IS2204 | Lecture | GG_LT | 6-17 |
 | 17:00-18:00 | IS2208 | Lecture | GG_LT | 6-17 |
 
@@ -63,8 +64,10 @@ Module names and elective classifications come from the linked Notion Modules da
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
 | 09:00-10:00 | EC2204 | Lecture | BOOLE_3 | 6-13 and 15-17 |
+| 09:00-10:00 | EC2204 | Lecture | BHSC_G02* | 14 only |
 | 10:00-11:00 | IS2208 | Tutorial, Group A | ORB_BIS | 6-17 |
 | 11:00-12:00 | IS2206 | Tutorial | D_ORB_1.112 | 6-17 |
+| 13:00-14:00 | IS2206 | Lecture | GG_LT | 6-17 |
 | 14:00-15:00 | IS2208 | Lecture | GG_LT | 6-17 |
 | 15:00-16:00 | IS2208 | Tutorial, Group B | ORB_BIS | 6-17 |
 | 16:00-18:00 | MG2008 | Lecture | BOOLE_4 | 6-17 |
@@ -75,7 +78,6 @@ Module names and elective classifications come from the linked Notion Modules da
 |---|---|---|---|---|
 | 09:00-10:00 | IS2208 | Tutorial, Group B | ORB_BIS | 6-17 |
 | 10:00-12:00 | IS2217 | Lecture | ELD5_G01 | 7-17 |
-| 13:00-14:00 | IS2206 | Lecture | GG_LT | 6-11 |
 | 15:00-16:00 | IS2206 | Tutorial | D_ORB_1.112 | 6-17 |
 | 16:00-17:00 | IS2206 | Tutorial | D_ORB_1.112 | 6-17 |
 | 17:00-18:00 | MG2001 | Lecture | BOOLE_3 | 6-17 |
@@ -108,41 +110,37 @@ Module names and elective classifications come from the linked Notion Modules da
 ### Semester 1 exceptions
 
 - Week 6 includes the additional IS2217 lecture on Monday and does not include the regular Wednesday IS2217 or FE1200 sessions.
-- IS2206 in GG_LT on Wednesday runs only in Weeks 6-11.
-- EC2204 on Tuesday does not run in Week 14.
+- Weeks 10 and 14 include an additional IS2217 lecture on Monday from 15:00-16:00 in BHSC_G01*.
+- EC2204 runs in BHSC_G02* instead of BOOLE_3 in Week 14.
 - **Monday, 26 October 2026:** public holiday; Week 13 Monday sessions are cancelled.
 
 ## Semester 2
 
 **Teaching weeks in the PDF:** Weeks 24-33 and 36-37, from 11 January to 18 April 2027, with Easter recess between Weeks 33 and 36.
 
+The updated Semester 2 PDF contains lectures only; no tutorial sessions or tutorial groups are listed.
+
 ### Monday
 
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
-| 10:00-11:00 | IS2207 | Tutorial, Group B | ORB_G80 | 24-33 and 36-37 |
+| 09:00-11:00 | MG2003 | Lecture | BOOLE_1 | 24-33 and 36-37 |
 | 11:00-12:00 | IS2207 | Lecture | WGB_107 | 24-33 and 36-37 |
-| 12:00-13:00 | IS2207 | Tutorial, Group A | ORB_G80 | 24-33 and 36-37 |
 | 13:00-15:00 | IS2215 | Lecture | KANE_G01 | 24-33 and 36-37 |
 | 15:00-16:00 | IS2217 | Lecture | WGB_G05 | 24 only |
-| 17:00-19:00 | IS2209 | Lecture | BOOLE_3 | 24-33 and 36-37 |
+| 15:00-16:00 | IS2217 | Lecture | BHSC_G02* | 27, 30, and 33 |
+| 17:00-18:00 | IS2209 | Lecture | BOOLE_3 | 24-33 and 36-37 |
 
 ### Tuesday
 
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
-| 10:00-11:00 | IS2209 | Tutorial, Group A | ORB_G80 | 24-33 and 36-37 |
-| 11:00-12:00 | IS2207 | Tutorial, Group A | ORB_G80 | 24-33 and 36-37 |
 | 14:00-15:00 | AC2202 | Lecture | BOOLE_2 | 24-33 and 36-37 |
-| 15:00-16:00 | IS2209 | Tutorial, Group B | ORB_G80 | 24-33 and 36-37 |
 
 ### Wednesday
 
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
-| 09:00-10:00 | IS2209 | Tutorial, Group B | ORB_G80 | 24-33 and 36-37 |
-| 12:00-13:00 | IS2207 | Tutorial, Group B | ORB_G80 | 24-33 and 36-37 |
-| 13:00-14:00 | MG2007 | Lecture | BOOLE_3 | 24-33 and 36-37 |
 | 15:00-16:00 | AC2202 | Lecture | BOOLE_1 | 24-33 and 36-37 |
 
 ### Thursday
@@ -150,20 +148,19 @@ Module names and elective classifications come from the linked Notion Modules da
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
 | 11:00-12:00 | IS2207 | Lecture | AL_G30* | 24-33 and 36-37 |
-| 13:00-14:00 | IS2209 | Tutorial, Group A | ORB_G80 | 24-33 and 36-37 |
 | 16:00-18:00 | IS2205 | Lecture | KANE_G01 | 24-33 and 36-37 |
 
 ### Friday
 
 | Time | Module | Type | Room | Weeks |
 |---|---|---|---|---|
-| 10:00-13:00 | IS2217 | Lecture | CONN_S3 | 24-33 and 36-37 |
-| 14:00-16:00 | MG2003 | Lecture | BOOLE_3 | 24-33 and 36-37 |
-| 16:00-17:00 | MG2007 | Lecture | BOOLE_3 | 24-33 and 36-37 |
+| 10:00-13:00 | IS2217 | Lecture | ORB_G.79 | 24-33 and 36-37 |
+| 14:00-16:00 | MG2007 | Lecture | BOOLE_3 | 24-33 and 36-37 |
 
 ### Semester 2 exceptions
 
-- Week 24 includes an additional IS2217 lecture on Monday from 15:00-16:00.
+- Week 24 includes an additional IS2217 lecture on Monday from 15:00-16:00 in WGB_G05.
+- Weeks 27, 30, and 33 include an additional IS2217 lecture on Monday from 15:00-16:00 in BHSC_G02*.
 - **Monday, 1 February 2027:** St Brigid's Day; Week 27 Monday sessions are cancelled.
 - **Wednesday, 17 March 2027:** St Patrick's Day; Week 33 Wednesday sessions are cancelled.
 - **19 March-2 April 2027:** Easter recess.

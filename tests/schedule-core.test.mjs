@@ -19,7 +19,7 @@ import {
   weeklyHours,
 } from "../src/schedule-core.mjs";
 
-test("source data includes the Week 6 Monday overlap and both tutorial groups", () => {
+test("source data includes the Week 6 Monday overlap and current tutorial groups", () => {
   const monday = events.filter(
     (event) =>
       event.weeks.includes(6) &&
@@ -39,11 +39,13 @@ test("source data includes the Week 6 Monday overlap and both tutorial groups", 
     [
       ["s1-is2208-t-tue-b", 2, "15:00", "16:00"],
       ["s1-is2208-t-wed-b", 3, "09:00", "10:00"],
-      ["s2-is2207-t-mon-b", 1, "10:00", "11:00"],
-      ["s2-is2209-t-tue-b", 2, "15:00", "16:00"],
-      ["s2-is2209-t-wed-b", 3, "09:00", "10:00"],
-      ["s2-is2207-t-wed-b", 3, "12:00", "13:00"],
     ],
+  );
+  assert.equal(
+    events.some(
+      ({ semester, kind }) => semester === 2 && kind === "Tutorial",
+    ),
+    false,
   );
   assert.equal(teachingWeeks.length, 24);
 });
@@ -154,14 +156,63 @@ test("week-specific exceptions match the supplied PDFs", () => {
     "A",
   );
 
-  assert.equal(
-    week14Events.some(({ id }) => id === "s1-ec2204-l-tue"),
-    false,
+  assert.equal(week14Events.some(({ id }) => id === "s1-ec2204-l-tue"), false);
+  assert.ok(
+    week14Events.some(
+      ({ id, room }) =>
+        id === "s1-ec2204-l-tue-w14" && room === "BHSC_G02*",
+    ),
   );
-  assert.equal(week36Events.length, 15);
+  assert.ok(
+    week14Events.some(
+      ({ id, room }) =>
+        id === "s1-is2217-l-mon-w10-w14" && room === "BHSC_G01*",
+    ),
+  );
+  assert.equal(week36Events.length, 10);
+  assert.equal(weeklyHours(week36Events), 16);
   assert.equal(
     week36Events.some(({ id }) => id === "s2-is2217-l-mon"),
     false,
+  );
+});
+
+test("Semester 2 reflects the revised lecture-only timetable", () => {
+  const semesterTwoEvents = events.filter(({ semester }) => semester === 2);
+
+  assert.equal(
+    semesterTwoEvents.some(({ kind }) => kind === "Tutorial"),
+    false,
+  );
+  assert.ok(
+    semesterTwoEvents.some(
+      ({ id, day, start, end, room }) =>
+        id === "s2-mg2003-l-mon" &&
+        day === 1 &&
+        start === "09:00" &&
+        end === "11:00" &&
+        room === "BOOLE_1",
+    ),
+  );
+  assert.ok(
+    semesterTwoEvents.some(
+      ({ id, start, end, room }) =>
+        id === "s2-mg2007-l-fri" &&
+        start === "14:00" &&
+        end === "16:00" &&
+        room === "BOOLE_3",
+    ),
+  );
+  assert.ok(
+    semesterTwoEvents.some(
+      ({ id, room }) => id === "s2-is2217-l-fri" && room === "ORB_G.79",
+    ),
+  );
+  assert.deepEqual(
+    semesterTwoEvents.find(
+      ({ id }) => id === "s2-is2217-l-mon-w27-w30-w33",
+    )?.weeks,
+    [27, 30, 33],
   );
 });
 
