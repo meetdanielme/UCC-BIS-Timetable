@@ -58,6 +58,8 @@ test("built planner embeds source data and no module imports", async () => {
   assert.match(html, /ORB_G\.79/);
   assert.doesNotMatch(html, /s1-is2206-l-wed/);
   assert.doesNotMatch(html, /s2-is2207-t-mon-b/);
+  assert.match(html, /2027-04-12/);
+  assert.doesNotMatch(html, /2027-03-30/);
   assert.match(html, /2027-04-30/);
   assert.doesNotMatch(html, /\bimport\s+\{/);
   assert.doesNotMatch(html, /\bexport\s+(const|function)/);

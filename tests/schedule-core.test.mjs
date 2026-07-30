@@ -88,6 +88,19 @@ test("public-holiday events are cancelled and excluded from contact hours", () =
   );
 });
 
+test("academic calendar matches the current UCC 2026-27 key dates", () => {
+  assert.ok(
+    academicCalendar.some(
+      ({ date, label }) =>
+        date === "2027-04-12" && label === "Last week of S2 lectures",
+    ),
+  );
+  assert.equal(
+    academicCalendar.some(({ date }) => date === "2027-03-30"),
+    false,
+  );
+});
+
 test("assigns separate lanes to simultaneous events", () => {
   const overlap = assignOverlapLanes([
     { id: "a", start: "13:00", end: "14:00" },
