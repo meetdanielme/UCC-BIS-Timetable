@@ -8,8 +8,8 @@
 | Brand | Official UCC identity in the navy header | Official UCC logo is embedded in the standalone HTML and replaces the text-only mark | Matched |
 | Event anatomy | Week grid with time axis, room, module, type, and visible overlap treatment | Event blocks show code, time, and room; overlap lanes are equal width with a compact `2x` cue | Matched and corrected after the first render |
 | Responsive behavior | Hybrid concept should become a readable mobile agenda | At 390x844 the timeline is replaced by a chronological agenda, four Week 7 overlap labels remain visible, and page width equals scroll width | Matched |
-| Controls | Semester, week navigation, Group A/B switch, elective filters, session-type toggles, print | The group switch persists locally; core modules remain visible; Notion-classified electives and the Lecture/Tutorial selection can be filtered and saved by semester | Matched |
-| Source accuracy | PDFs, academic calendar, and Notion Modules database | Both tutorial groups included; PDF times, room codes, and weeks retained; Notion module names/elective types included; public-holiday cancellations and TBC milestones included | Matched |
+| Controls | Semester, week navigation, Group A/B switch, elective filters, session-type toggles, print | The group switch persists locally and appears only in Semester 1, where grouped tutorials exist; core modules remain visible; Notion-classified electives and available session types can be filtered and saved by semester | Matched |
+| Source accuracy | PDFs, academic calendar, and Notion Modules database | Both Semester 1 tutorial groups and the revised Semester 2 lecture-only timetable are included; PDF times, room codes, and weeks are retained; Notion module names/elective types, public-holiday cancellations, and TBC milestones are included | Matched |
 | Academic events | Complete source calendar without overwhelming the timetable | Four relevant dates are visible by default; all dated and TBC events remain available behind one disclosure | Matched |
 
 ## Material fixes made

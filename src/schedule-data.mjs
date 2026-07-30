@@ -99,19 +99,21 @@ const event = (
 export const events = [
   event("s1-is2208-t-mon-a", 1, "IS2208", "Tutorial", 1, "13:00", "14:00", "ORB_BIS", semesterOneWeeks, "A"),
   event("s1-is2217-l-mon", 1, "IS2217", "Lecture", 1, "13:00", "14:00", "BHSC_G02*", [6]),
+  event("s1-is2217-l-mon-w10-w14", 1, "IS2217", "Lecture", 1, "15:00", "16:00", "BHSC_G01*", [10, 14]),
   event("s1-is2204-l-mon", 1, "IS2204", "Lecture", 1, "16:00", "17:00", "GG_LT", semesterOneWeeks),
   event("s1-is2208-l-mon", 1, "IS2208", "Lecture", 1, "17:00", "18:00", "GG_LT", semesterOneWeeks),
 
   event("s1-ec2204-l-tue", 1, "EC2204", "Lecture", 2, "09:00", "10:00", "BOOLE_3", [...range(6, 13), ...range(15, 17)]),
+  event("s1-ec2204-l-tue-w14", 1, "EC2204", "Lecture", 2, "09:00", "10:00", "BHSC_G02*", [14]),
   event("s1-is2208-t-tue-a", 1, "IS2208", "Tutorial", 2, "10:00", "11:00", "ORB_BIS", semesterOneWeeks, "A"),
   event("s1-is2206-t-tue", 1, "IS2206", "Tutorial", 2, "11:00", "12:00", "D_ORB_1.112", semesterOneWeeks),
+  event("s1-is2206-l-tue", 1, "IS2206", "Lecture", 2, "13:00", "14:00", "GG_LT", semesterOneWeeks),
   event("s1-is2208-l-tue", 1, "IS2208", "Lecture", 2, "14:00", "15:00", "GG_LT", semesterOneWeeks),
   event("s1-is2208-t-tue-b", 1, "IS2208", "Tutorial", 2, "15:00", "16:00", "ORB_BIS", semesterOneWeeks, "B"),
   event("s1-mg2008-l-tue", 1, "MG2008", "Lecture", 2, "16:00", "18:00", "BOOLE_4", semesterOneWeeks),
 
   event("s1-is2208-t-wed-b", 1, "IS2208", "Tutorial", 3, "09:00", "10:00", "ORB_BIS", semesterOneWeeks, "B"),
   event("s1-is2217-l-wed", 1, "IS2217", "Lecture", 3, "10:00", "12:00", "ELD5_G01", range(7, 17)),
-  event("s1-is2206-l-wed", 1, "IS2206", "Lecture", 3, "13:00", "14:00", "GG_LT", range(6, 11)),
   event("s1-is2206-t-wed-15", 1, "IS2206", "Tutorial", 3, "15:00", "16:00", "D_ORB_1.112", semesterOneWeeks),
   event("s1-is2206-t-wed-16", 1, "IS2206", "Tutorial", 3, "16:00", "17:00", "D_ORB_1.112", semesterOneWeeks),
   event("s1-mg2001-l-wed", 1, "MG2001", "Lecture", 3, "17:00", "18:00", "BOOLE_3", semesterOneWeeks),
@@ -127,30 +129,22 @@ export const events = [
   event("s1-ac2206-l-fri", 1, "AC2206", "Lecture", 5, "13:00", "15:00", "BOOLE_1", semesterOneWeeks),
   event("s1-ec2204-l-fri", 1, "EC2204", "Lecture", 5, "15:00", "16:00", "BOOLE_3", semesterOneWeeks),
 
+  event("s2-mg2003-l-mon", 2, "MG2003", "Lecture", 1, "09:00", "11:00", "BOOLE_1", semesterTwoWeeks),
   event("s2-is2207-l-mon", 2, "IS2207", "Lecture", 1, "11:00", "12:00", "WGB_107", semesterTwoWeeks),
-  event("s2-is2207-t-mon-b", 2, "IS2207", "Tutorial", 1, "10:00", "11:00", "ORB_G80", semesterTwoWeeks, "B"),
-  event("s2-is2207-t-mon-a", 2, "IS2207", "Tutorial", 1, "12:00", "13:00", "ORB_G80", semesterTwoWeeks, "A"),
   event("s2-is2215-l-mon", 2, "IS2215", "Lecture", 1, "13:00", "15:00", "KANE_G01", semesterTwoWeeks),
   event("s2-is2217-l-mon", 2, "IS2217", "Lecture", 1, "15:00", "16:00", "WGB_G05", [24]),
-  event("s2-is2209-l-mon", 2, "IS2209", "Lecture", 1, "17:00", "19:00", "BOOLE_3", semesterTwoWeeks),
+  event("s2-is2217-l-mon-w27-w30-w33", 2, "IS2217", "Lecture", 1, "15:00", "16:00", "BHSC_G02*", [27, 30, 33]),
+  event("s2-is2209-l-mon", 2, "IS2209", "Lecture", 1, "17:00", "18:00", "BOOLE_3", semesterTwoWeeks),
 
-  event("s2-is2209-t-tue-a", 2, "IS2209", "Tutorial", 2, "10:00", "11:00", "ORB_G80", semesterTwoWeeks, "A"),
-  event("s2-is2207-t-tue-a", 2, "IS2207", "Tutorial", 2, "11:00", "12:00", "ORB_G80", semesterTwoWeeks, "A"),
   event("s2-ac2202-l-tue", 2, "AC2202", "Lecture", 2, "14:00", "15:00", "BOOLE_2", semesterTwoWeeks),
-  event("s2-is2209-t-tue-b", 2, "IS2209", "Tutorial", 2, "15:00", "16:00", "ORB_G80", semesterTwoWeeks, "B"),
 
-  event("s2-is2209-t-wed-b", 2, "IS2209", "Tutorial", 3, "09:00", "10:00", "ORB_G80", semesterTwoWeeks, "B"),
-  event("s2-is2207-t-wed-b", 2, "IS2207", "Tutorial", 3, "12:00", "13:00", "ORB_G80", semesterTwoWeeks, "B"),
-  event("s2-mg2007-l-wed", 2, "MG2007", "Lecture", 3, "13:00", "14:00", "BOOLE_3", semesterTwoWeeks),
   event("s2-ac2202-l-wed", 2, "AC2202", "Lecture", 3, "15:00", "16:00", "BOOLE_1", semesterTwoWeeks),
 
   event("s2-is2207-l-thu", 2, "IS2207", "Lecture", 4, "11:00", "12:00", "AL_G30*", semesterTwoWeeks),
-  event("s2-is2209-t-thu-a", 2, "IS2209", "Tutorial", 4, "13:00", "14:00", "ORB_G80", semesterTwoWeeks, "A"),
   event("s2-is2205-l-thu", 2, "IS2205", "Lecture", 4, "16:00", "18:00", "KANE_G01", semesterTwoWeeks),
 
-  event("s2-is2217-l-fri", 2, "IS2217", "Lecture", 5, "10:00", "13:00", "CONN_S3", semesterTwoWeeks),
-  event("s2-mg2003-l-fri", 2, "MG2003", "Lecture", 5, "14:00", "16:00", "BOOLE_3", semesterTwoWeeks),
-  event("s2-mg2007-l-fri", 2, "MG2007", "Lecture", 5, "16:00", "17:00", "BOOLE_3", semesterTwoWeeks),
+  event("s2-is2217-l-fri", 2, "IS2217", "Lecture", 5, "10:00", "13:00", "ORB_G.79", semesterTwoWeeks),
+  event("s2-mg2007-l-fri", 2, "MG2007", "Lecture", 5, "14:00", "16:00", "BOOLE_3", semesterTwoWeeks),
 ];
 
 export const academicCalendar = [

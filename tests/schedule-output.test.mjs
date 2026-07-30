@@ -53,6 +53,11 @@ test("built planner embeds source data and no module imports", async () => {
   const html = await readFile(outputUrl, "utf8");
 
   assert.match(html, /s1-is2217-l-mon/);
+  assert.match(html, /s1-is2206-l-tue/);
+  assert.match(html, /s2-mg2003-l-mon/);
+  assert.match(html, /ORB_G\.79/);
+  assert.doesNotMatch(html, /s1-is2206-l-wed/);
+  assert.doesNotMatch(html, /s2-is2207-t-mon-b/);
   assert.match(html, /2027-04-30/);
   assert.doesNotMatch(html, /\bimport\s+\{/);
   assert.doesNotMatch(html, /\bexport\s+(const|function)/);
@@ -91,8 +96,11 @@ test("group switch labels the selected timetable throughout the planner", async 
 
   assert.match(html, /Choose tutorial group/);
   assert.match(html, /normalizeSavedGroup/);
+  assert.match(html, /semesterHasGroups/);
+  assert.match(html, /elements\.groupSwitch\.hidden = !hasGroups/);
+  assert.match(html, /\[hidden\]\s*\{\s*display: none !important/);
   assert.match(html, /s1-is2208-t-tue-b/);
-  assert.match(html, /s2-is2207-t-mon-b/);
+  assert.match(html, /s1-is2208-t-wed-b/);
 });
 
 test("header uses the embedded official UCC logo and academic events are progressively disclosed", async () => {
