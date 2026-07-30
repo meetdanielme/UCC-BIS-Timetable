@@ -19,8 +19,6 @@
 | Semester 2 study period | 19-29 April 2027 |
 | Summer examinations | 30 April-14 May 2027 |
 
-The Semester 2 PDF contains teaching in Weeks 36-37 (5-18 April), even though the academic calendar separately lists 30 March as the “Last week of semester 2.” Both source facts are retained here.
-
 ## Module catalogue
 
 Module names and elective classifications come from the linked Notion Modules database.
@@ -190,7 +188,7 @@ The updated Semester 2 PDF contains lectures only; no tutorial sessions or tutor
 | TBC | Spring examinations begin and end |
 | 17 March 2027 | St Patrick's Day - no lectures |
 | 19 March-2 April 2027 | Easter recess |
-| 30 March 2027 | Last week of Semester 2, as listed in the academic calendar |
+| 12 April 2027 | Last week of S2 lectures |
 | 19-29 April 2027 | Semester 2 study period |
 | 30 April 2027 | Summer examinations begin |
 | 3 May 2027 | Public holiday - no examinations |

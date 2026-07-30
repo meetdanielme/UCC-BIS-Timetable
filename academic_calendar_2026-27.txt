@@ -1,6 +1,7 @@
 UCC Academic Calendar 2026-27 - Milestone Events
 =================================================
 Source: https://www.ucc.ie/en/student-records/key-dates/
+Verified: 30 July 2026
 Note: Dates are subject to change
 Note: These events are integrated into schedule.html
 
@@ -27,7 +28,7 @@ SEMESTER 2
 TBC                  Start of Spring Examinations
 17 March 2027        Public Holiday - St Patrick's Day - no lectures
 TBC                  End of Spring Examinations
-30 March 2027        Last week of semester 2
+12 April 2027        Last week of S2 lectures
 19 Mar-02 April 2027 Easter Recess (two weeks)
 19-29 April 2027     Study Period S2 (two weeks)
 30 April 2027        Start of summer examinations
